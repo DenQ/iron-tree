@@ -1,4 +1,8 @@
-var assert = require('assert');
+var chai = require('chai')
+  , assert = chai.assert
+  , expect = chai.expect
+  , should = chai.should();
+
 var Node = require('../node');
 
 const rootContent = {
@@ -8,15 +12,18 @@ const rootContent = {
 
 describe('Node', function() {
 
-  describe('Exist node and fileds', function() {
+  it('Check children and content field', function() {
+    const node = new Node(rootContent);
+    const { children, content } = node;
 
-    it('Check children and content field', function() {
-      const node = new Node(rootContent);
-      assert.equal(0, node.children.length);
-      assert.equal(rootContent.name, node.content.name);
-      // assert.equal(rootContent.name, node.get('name'));
-    });
+    assert.isArray(children);
+    expect(children).to.have.lengthOf(0);
+    expect(content.name).to.equal(rootContent.name);
+  });
 
+  it('Check correct work getter', function() {
+    const node = new Node(rootContent);
+    assert.equal(rootContent.name, node.get('name'));
   });
 
 });
