@@ -1,4 +1,4 @@
-var chai = require('chai')
+ chai = require('chai')
   , assert = chai.assert
   , expect = chai.expect
   , should = chai.should();
@@ -24,6 +24,15 @@ describe('Node', function() {
   it('Check correct work getter', function() {
     const node = new Node(rootContent);
     assert.equal(rootContent.name, node.get('name'));
+    expect(node.get('lastname')).to.equal(undefined);
   });
+
+  it('Add child nodes', function() {
+    const node = new Node(rootContent);
+    const childNode = node.add({ id: 2, name: 'Two node'});
+    expect(childNode instanceof Node).to.equal(true);
+    expect(node.children).to.have.lengthOf(1);
+  });
+
 
 });

@@ -6,7 +6,15 @@ module.exports = class Node {
   }
 
   get(fieldKey) {
-    return this.content[fieldKey];
+    if (typeof this.content[fieldKey] !== 'undefined') {
+      return this.content[fieldKey];
+    }
+  }
+
+  add(child) {
+    const node = new Node(child);
+    this.children.push(node);
+    return node;
   }
 
 }
