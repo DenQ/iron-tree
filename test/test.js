@@ -32,6 +32,41 @@ describe('Node', function() {
     const childNode = node.add({ id: 2, name: 'Two node'});
     expect(childNode instanceof Node).to.equal(true);
     expect(node.children).to.have.lengthOf(1);
+    expect(node.length).to.equal(1);
+  });
+
+  it('Add child nodes with length', function() {
+    const node = new Node(rootContent);
+    node.add({ id: 2, name: 'Two node'});
+    node.add({ id: 3, name: 'Three node'});
+
+    expect(node.children).to.have.lengthOf(2);
+    expect(node.length).to.equal(2);
+  });
+
+
+  it('Remove child node', function() {
+    const node = new Node(rootContent);
+    node.add({ id: 2, name: 'Two node'});
+    node.add({ id: 3, name: 'Three node'});
+    const removedNodes = node.remove((itemNode) => {
+      return itemNode.get('id') === 3;
+    });
+
+    expect(node.length).to.equal(1);
+    expect(removedNodes.length).to.equal(1);
+  });
+
+  it('Incorrect remove child node', function() {
+    const node = new Node(rootContent);
+    node.add({ id: 2, name: 'Two node'});
+    node.add({ id: 3, name: 'Three node'});
+    const removedNodes = node.remove((itemNode) => {
+      return itemNode.get('id') === 333;
+    });
+
+    expect(node.length).to.equal(2);
+    expect(removedNodes.length).to.equal(0);
   });
 
 
