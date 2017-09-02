@@ -1,5 +1,5 @@
 let Node = require('./node');
-let searchNode = require('../utils/search-node');
+const searchNode = require('../utils/search-node');
 
 module.exports = class Tree {
 

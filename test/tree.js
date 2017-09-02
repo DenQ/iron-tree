@@ -15,12 +15,11 @@ describe('Tree', function() {
     tree = new Tree(object);
   });
 
-  it('It exists', function() {
-    expect(tree instanceof Tree).to.equal(true);
-  });
-
-
   describe('Constructor', function() {
+
+    it('It exists', function() {
+      expect(tree instanceof Tree).to.equal(true);
+    });
 
     it('With params', function() {
       expect(tree.rootNode instanceof Node).to.equal(true);
