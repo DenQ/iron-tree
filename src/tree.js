@@ -1,20 +1,5 @@
-var Node = require('./node');
-
-function searchNode(tree, node, criteria, options) {
-  const currentNode = node || tree.rootNode;
-  if (criteria(currentNode)) {
-    return currentNode;
-  }
-  const children = currentNode.children
-  for(var i=0; i<children.length; i++) {
-    const item = children[i];
-    if (criteria(item)) {
-      return item;
-    } else {
-      return searchNode(tree, item, criteria);
-    }
-  }
-}
+let Node = require('./node');
+let searchNode = require('../utils/search-node');
 
 module.exports = class Tree {
 
