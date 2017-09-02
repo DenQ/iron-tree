@@ -3,7 +3,7 @@
   , expect = chai.expect
   , should = chai.should();
 
-var Node = require('../node');
+var Node = require('../src/node');
 
 const rootContent = {
   id: 1,
@@ -44,7 +44,6 @@ describe('Node', function() {
     expect(node.children).to.have.lengthOf(2);
     expect(node.length).to.equal(2);
   });
-
 
   it('Remove child node', function() {
     node.add({ id: 2, name: 'Two node'});
