@@ -46,6 +46,19 @@ describe('Tree', function() {
       expect(resultTree.rootNode instanceof Node).to.equal(true);
     });
 
+    it('Add regular node', function() {
+      const regularObject = { id:2, title: 'Node 2'}
+      const resultTree = tree.add((parentNode) => {
+        return parentNode.get('id') === 1;
+      }, regularObject);
+
+      expect(resultTree instanceof Tree).to.equal(true);
+      expect(resultTree.rootNode instanceof Node).to.equal(true);
+
+      expect(resultTree.rootNode.children).to.have.lengthOf(1);
+      expect(resultTree.rootNode.children[0].get('id')).to.equal(2);
+    });
+
   });
 
 });
