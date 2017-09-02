@@ -35,4 +35,17 @@ describe('Tree', function() {
 
   });
 
+
+  describe('Add', function() {
+
+    it('Add root', function() {
+      const tree = new Tree();
+      const resultTree = tree.add('root', object);
+
+      expect(resultTree instanceof Tree).to.equal(true);
+      expect(resultTree.rootNode instanceof Node).to.equal(true);
+    });
+
+  });
+
 });

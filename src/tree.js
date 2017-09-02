@@ -9,4 +9,14 @@ module.exports = class Tree {
     }
   }
 
+  add(callback, object) {
+    const type = typeof callback;
+    if (type === 'string' && callback === 'root') {
+      this.rootNode = new Node(object);
+      return this;
+    } else if (type === 'function') {
+
+    }
+  }
+
 }
