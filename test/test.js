@@ -9,11 +9,14 @@ const rootContent = {
   id: 1,
   name: 'Root',
 }
+let node = new Node(rootContent);
 
 describe('Node', function() {
+  beforeEach(function() {
+    node = new Node(rootContent);
+  });
 
   it('Check children and content field', function() {
-    const node = new Node(rootContent);
     const { children, content } = node;
 
     assert.isArray(children);
@@ -22,21 +25,19 @@ describe('Node', function() {
   });
 
   it('Check correct work getter', function() {
-    const node = new Node(rootContent);
     assert.equal(rootContent.name, node.get('name'));
     expect(node.get('lastname')).to.equal(undefined);
   });
 
   it('Add child nodes', function() {
-    const node = new Node(rootContent);
     const childNode = node.add({ id: 2, name: 'Two node'});
+
     expect(childNode instanceof Node).to.equal(true);
     expect(node.children).to.have.lengthOf(1);
     expect(node.length).to.equal(1);
   });
 
   it('Add child nodes with length', function() {
-    const node = new Node(rootContent);
     node.add({ id: 2, name: 'Two node'});
     node.add({ id: 3, name: 'Three node'});
 
@@ -46,7 +47,6 @@ describe('Node', function() {
 
 
   it('Remove child node', function() {
-    const node = new Node(rootContent);
     node.add({ id: 2, name: 'Two node'});
     node.add({ id: 3, name: 'Three node'});
     const removedNodes = node.remove((itemNode) => {
@@ -58,7 +58,6 @@ describe('Node', function() {
   });
 
   it('Incorrect remove child node', function() {
-    const node = new Node(rootContent);
     node.add({ id: 2, name: 'Two node'});
     node.add({ id: 3, name: 'Three node'});
     const removedNodes = node.remove((itemNode) => {
