@@ -1,6 +1,7 @@
 const Node = require('../src/node');
 const Tree = require('../src/tree');
 const showTree = require('../utils/show-tree');
+const generateTreeDefault = require('../fakes/generate-tree-default');
 
 let chai = require('chai')
   , assert = chai.assert
@@ -60,22 +61,7 @@ describe('Tree', function() {
     });
 
     it('Add many nodes', function() {
-      const list = [
-        { id: 2, parent: 1 },
-        { id: 3, parent: 1 },
-        { id: 4, parent: 3 },
-        { id: 5, parent: 4 },
-        { id: 6, parent: 5 },
-        { id: 7, parent: 2 },
-        { id: 8, parent: 7 },
-      ].map((item) => {
-        item.title = `Node ${item.id}`;
-        return item;
-      }).forEach((item) => {
-        tree.add((parentNode) => {
-          return parentNode.get('id') === item.parent;
-        }, item);
-      });
+      tree = generateTreeDefault();
 
       expect(tree instanceof Tree).to.equal(true);
       expect(tree.rootNode instanceof Node).to.equal(true);
@@ -88,8 +74,24 @@ describe('Tree', function() {
       expect(tree.rootNode.children[1].children[0].children[0].get('id')).to.equal(5);
       expect(tree.rootNode.children[1].children[0].children[0].children[0].get('id')).to.equal(6);
 
-      showTree(tree);
+      // showTree(tree);
     });
+  });
+
+
+  describe('Contains', function() {
+
+    it('Get element by criteria', function() {
+      tree = generateTreeDefault();
+
+      const targetNode = tree.contains((currentNode) => {
+        return currentNode.get('id') === 7;
+      });
+
+      expect(targetNode instanceof Node).to.equal(true);
+      expect(targetNode.get('id')).to.equal(7);
+    });
+
   });
 
 });

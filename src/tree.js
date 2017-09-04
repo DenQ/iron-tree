@@ -25,4 +25,8 @@ module.exports = class Tree {
     }
   }
 
+  contains(criteria) {
+    return searchNode(this, null, criteria);
+  }
+
 }
