@@ -81,15 +81,23 @@ describe('Tree', function() {
 
   describe('Contains', function() {
 
-    it('Get element by criteria', function() {
+    it('Search element when he does exists', function() {
       tree = generateTreeDefault();
-
       const targetNode = tree.contains((currentNode) => {
         return currentNode.get('id') === 7;
       });
 
       expect(targetNode instanceof Node).to.equal(true);
       expect(targetNode.get('id')).to.equal(7);
+    });
+
+    it('Search element when he does not exists', function() {
+      tree = generateTreeDefault();
+      const targetNode = tree.contains((currentNode) => {
+        return currentNode.get('id') === 100;
+      });
+
+      expect(targetNode).to.equal(undefined);
     });
 
   });
