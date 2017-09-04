@@ -1,5 +1,6 @@
-let Node = require('../src/node');
-let Tree = require('../src/tree');
+const Node = require('../src/node');
+const Tree = require('../src/tree');
+const showTree = require('../utils/show-tree');
 
 let chai = require('chai')
   , assert = chai.assert
@@ -88,28 +89,7 @@ describe('Tree', function() {
       expect(tree.rootNode.children[1].children[0].children[0].children[0].get('id')).to.equal(6);
 
       showTree(tree);
-
     });
   });
 
 });
-
-
-function showTree(tree) {
-  console.log(tree.rootNode.content);
-  tree.rootNode.children.forEach((item) => {
-    console.log('\t', item.content, item.children.length);
-    item.children.forEach((item)=>{
-      console.log('\t\t', item.content);
-      item.children.forEach((item)=>{
-        console.log('\t\t\t', item.content);
-        item.children.forEach((item)=>{
-          console.log('\t\t\t\t', item.content);
-          item.children.forEach((item)=>{
-            console.log('\t\t\t\t\t', item.content);
-          });
-        });
-      })
-    })
-  });
-}
