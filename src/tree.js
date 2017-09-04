@@ -17,8 +17,10 @@ module.exports = class Tree {
       return this;
     } else if (type === 'function') {
       const target = searchNode(this, null, callback);
-      if (target.add(object)) {
+      if (target && target.add(object)) {
         return this;
+      } else {
+        console.log('Warning', object);
       }
     }
   }
