@@ -12,6 +12,10 @@ module.exports = class Node {
     }
   }
 
+  set(fieldKey, value) {
+    return !!(this.content[fieldKey] = value);
+  }
+
   add(child) {
     const node = (child instanceof Node) ? child : new Node(child);
     node.parent = this;

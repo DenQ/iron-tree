@@ -34,6 +34,34 @@ describe('Node', function() {
   });
 
 
+  describe('Get', function() {
+
+    it('Method get with correct path', function() {
+      expect(node.get('id')).to.equal(1);
+      expect(node.get('name')).to.equal('Root');
+    });
+
+    it('Method get with incorrect path', function() {
+      expect(node.get('uid')).to.equal(undefined);
+    });
+
+  });
+
+  describe('Set', function() {
+
+    it('Method set with correct path', function() {
+      expect(node.set('id', 100)).to.equal(true);
+      expect(node.get('id')).to.equal(100);
+    });
+
+    it('Method set with incorrect path', function() {
+      expect(node.set('uid', 101)).to.equal(true);
+      expect(node.get('uid')).to.equal(101);
+    });
+
+  });
+
+
   describe('Add', function() {
 
     it('Add one node', function() {
