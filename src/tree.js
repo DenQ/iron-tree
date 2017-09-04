@@ -37,4 +37,13 @@ module.exports = class Tree {
     return false;
   }
 
+  move(search, destination) {
+    const targetNode = this.contains(search);
+    if (targetNode && this.remove(search)) {
+      const destinationNode = this.contains(destination);
+      return !!destinationNode.add(targetNode);
+    }
+    return false;
+  }
+
 }

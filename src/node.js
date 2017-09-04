@@ -13,7 +13,7 @@ module.exports = class Node {
   }
 
   add(child) {
-    const node = new Node(child);
+    const node = (child instanceof Node) ? child : new Node(child);
     node.parent = this;
     this.length++;
     this.children.push(node);

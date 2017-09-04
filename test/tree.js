@@ -134,4 +134,35 @@ describe('Tree', function() {
   });
 
 
+  describe('Move', function() {
+
+    it('Move exists branch', function() {
+      tree = generateTreeDefault();
+      const search = (currentNode) => currentNode.get('id') === 7;
+      const destination = (currentNode) => currentNode.get('id') === 3;
+      const result = tree.move(search, destination);
+      const targetNode = tree.contains(search);
+
+      expect(result).to.equal(true);
+      expect(targetNode.get('id')).to.equal(7);
+      expect(targetNode.parent.get('id')).to.equal(3);
+
+      // showTree(tree);
+    });
+
+    it('Move not exists branch', function() {
+      tree = generateTreeDefault();
+      const search = (currentNode) => currentNode.get('id') === 100
+      const destination = (currentNode) => currentNode.get('id') === 3;
+      const result = tree.move(search, destination);
+      const targetNode = tree.contains(search);
+      
+      expect(result).to.equal(false);
+      expect(targetNode).to.equal(undefined);
+
+      // showTree(tree);
+    });
+  });
+
+
 });
