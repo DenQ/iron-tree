@@ -102,4 +102,36 @@ describe('Tree', function() {
 
   });
 
+
+  describe('Remove', function() {
+
+    it('Remove correct criteria', function() {
+      tree = generateTreeDefault();
+      const result = tree.remove((currentNode) => {
+        return currentNode.get('id') === 7;
+      });
+      const targetNode = tree.contains((currentNode) => {
+        return currentNode.get('id') === 7;
+      });
+
+      expect(result).to.equal(true);
+      expect(targetNode).to.equal(undefined);
+    });
+
+    it('Remove incorrect criteria', function() {
+      tree = generateTreeDefault();
+      const result = tree.remove((currentNode) => {
+        return currentNode.get('id') === 100;
+      });
+      const targetNode = tree.contains((currentNode) => {
+        return currentNode.get('id') === 100;
+      });
+
+      expect(result).to.equal(false);
+      expect(targetNode).to.equal(undefined);
+    });
+
+  });
+
+
 });

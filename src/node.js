@@ -14,6 +14,7 @@ module.exports = class Node {
 
   add(child) {
     const node = new Node(child);
+    node.parent = this;
     this.length++;
     this.children.push(node);
     return node;
@@ -21,7 +22,7 @@ module.exports = class Node {
 
   remove(callback) {
     const index = this.children.findIndex(callback);
-    if (index > 0) {
+    if (index > -1) {
       const removeItems = this.children.splice(index, 1);
       this.length--;
       return removeItems;

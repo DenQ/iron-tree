@@ -29,4 +29,12 @@ module.exports = class Tree {
     return searchNode(this, null, criteria);
   }
 
+  remove(criteria) {
+    const targetNode = this.contains(criteria);
+    if (targetNode) {
+      return !!targetNode.parent.remove(criteria);
+    }
+    return false;
+  }
+
 }
