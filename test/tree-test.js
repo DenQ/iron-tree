@@ -217,6 +217,7 @@ describe('Tree', function() {
 
       expect(tree.rootNode.children[0].get('id')).to.equal(2);
       expect(tree.rootNode.children[1].get('id')).to.equal(3);
+
       // showTree(tree);
     });
 
@@ -226,10 +227,41 @@ describe('Tree', function() {
   describe('toJson', function() {
 
     it('Searialize tree to json', function() {
-      // tree = generateTreeDefault();
-      // const json = tree.toJson();
-      //
-      // console.log(json);
+      tree = generateTreeDefault();
+      const json = tree.toJson();
+
+      expect(json.id).to.equal(1);
+      expect(json.children[0].id).to.equal(2);
+      expect(json.children[0].children[0].id).to.equal(7);
+      expect(json.children[0].children[0].children[0].id).to.equal(8);
+      expect(json.children[1].id).to.equal(3);
+      expect(json.children[1].children[0].id).to.equal(4);
+      expect(json.children[1].children[0].children[0].id).to.equal(5);
+    });
+
+    it('Searialize tree to json after sort desc', function() {
+      tree = generateTreeDefault();
+      tree.sort(compareById(false));
+      const json = tree.toJson();
+
+      expect(json.id).to.equal(1);
+      expect(json.children[1].id).to.equal(2);
+      expect(json.children[1].children[0].id).to.equal(7);
+      expect(json.children[1].children[0].children[0].id).to.equal(8);
+      expect(json.children[0].id).to.equal(3);
+      expect(json.children[0].children[0].id).to.equal(4);
+      expect(json.children[0].children[0].children[0].id).to.equal(5);
+    });
+
+    it('Searialize tree to json after remove element', function() {
+      tree = generateTreeDefault();
+      tree.remove((parentNode) => parentNode.get('id') === 2);
+      const json = tree.toJson();
+
+      expect(json.id).to.equal(1);
+      expect(json.children[0].id).to.equal(3);
+      expect(json.children[0].children[0].id).to.equal(4);
+      expect(json.children[0].children[0].children[0].id).to.equal(5);
     });
 
   });
