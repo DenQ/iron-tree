@@ -4,12 +4,12 @@ const showTree = require('../utils/show-tree');
 const compareById = require('../utils/node-compare-by-id');
 const generateTreeDefault = require('../fakes/generate-tree-default');
 
-let chai = require('chai')
+const chai = require('chai')
   , assert = chai.assert
   , expect = chai.expect
   , should = chai.should();
 
-let object = {id: 1, title: 'Root'};
+let object = { id: 1, title: 'Root' };
 let tree = new Tree(object);
 
 describe('Tree', function() {
@@ -198,8 +198,6 @@ describe('Tree', function() {
     });
 
   });
-
-
 
   describe('Sort', function() {
 
