@@ -160,10 +160,47 @@ describe('Tree', function() {
 
       expect(result).to.equal(false);
       expect(targetNode).to.equal(undefined);
+    });
+
+  });
+
+
+  describe('Traversal', function() {
+
+    it('Add new property for each node', function() {
+      tree = generateTreeDefault();
+      tree.traversal(null, (currentNode) => {
+        currentNode.set('some', true);
+      });
+
+      tree.traversal(null, (currentNode) => {
+        const some = currentNode.get('some');
+        expect(some).to.equal(true);
+      });
+    });
+
+    it('Add new property only for even nodes', function() {
+      tree = generateTreeDefault();
+      tree.traversal(null, (currentNode) => {
+        if (currentNode.get('id')%2 === 0) {
+          currentNode.set('some', true);
+        }
+      });
+
+      tree.traversal(null, (currentNode) => {
+        const some = currentNode.get('some');
+        if (currentNode.get('id')%2 === 0) {
+          expect(some).to.equal(true);
+        } else {
+          expect(some).to.equal(undefined);
+        }
+      });
 
       // showTree(tree);
     });
+
   });
+
 
 
 //   describe('Sort', function() {
@@ -178,14 +215,3 @@ describe('Tree', function() {
 //   });
 //
 });
-
-// function traversal(tree, node = null, callback) {
-//   const currentNode = node || tree.rootNode;
-//   const children = currentNode.children;
-//   children.sort(compareById(false));
-//
-//   for(let i=0; i<children.length; i++) {
-//     const item = children[i];
-//     traversal(tree, item, callback);
-//   }
-// }

@@ -1,6 +1,16 @@
 let Node = require('./node');
 const searchNode = require('../utils/search-node');
 
+function traversalTree(tree, node = null, criteria, callback) {
+  const currentNode = node || tree.rootNode;
+  currentNode.traversal(criteria, callback);
+  const children = currentNode.children;
+
+  children.forEach((item) => {
+    traversalTree(tree, item, criteria, callback);
+  });
+}
+
 module.exports = class Tree {
 
   constructor(object = undefined) {
@@ -44,6 +54,10 @@ module.exports = class Tree {
       return !!destinationNode.add(targetNode);
     }
     return false;
+  }
+
+  traversal(criteria, callback) {
+    traversalTree(this, null, criteria, callback);
   }
 
   sort(compare) {
