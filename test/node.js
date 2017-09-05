@@ -1,9 +1,10 @@
- chai = require('chai')
+const Node = require('../src/node');
+const compareById = require('../utils/node-compare-by-id');
+const chai = require('chai')
   , assert = chai.assert
   , expect = chai.expect
   , should = chai.should();
 
-var Node = require('../src/node');
 
 const rootContent = {
   id: 1,
@@ -105,6 +106,37 @@ describe('Node', function() {
 
       expect(node.length).to.equal(2);
       expect(removedNodes.length).to.equal(0);
+    });
+
+  });
+
+
+  describe('Sort', function() {
+
+    it('Order desc', function() {
+      node.add({ id: 2, name: 'Two node'});
+      node.add({ id: 3, name: 'Three node'});
+      node.add({ id: 15, name: 'Fifteen node'});
+      node.add({ id: 4, name: 'Four node'});
+      node.sort(compareById(false));
+
+      expect(node.children[0].get('id')).to.equal(15);
+      expect(node.children[1].get('id')).to.equal(4);
+      expect(node.children[2].get('id')).to.equal(3);
+      expect(node.children[3].get('id')).to.equal(2);
+    });
+
+    it('Order asc', function() {
+      node.add({ id: 2, name: 'Two node'});
+      node.add({ id: 3, name: 'Three node'});
+      node.add({ id: 15, name: 'Fifteen node'});
+      node.add({ id: 4, name: 'Four node'});
+      node.sort(compareById(true));
+
+      expect(node.children[0].get('id')).to.equal(2);
+      expect(node.children[1].get('id')).to.equal(3);
+      expect(node.children[2].get('id')).to.equal(4);
+      expect(node.children[3].get('id')).to.equal(15);
     });
 
   });

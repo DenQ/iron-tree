@@ -33,4 +33,8 @@ module.exports = class Node {
     } return [];
   }
 
+  sort(compare) {
+    return this.children.sort(compare);
+  }
+
 }
