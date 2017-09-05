@@ -264,6 +264,19 @@ describe('Tree', function() {
       expect(json.children[0].children[0].children[0].id).to.equal(5);
     });
 
+    it('Searialize tree to json with options: key_children=child', function() {
+      tree = generateTreeDefault();
+      const json = tree.toJson({
+        key_children: 'child',
+      });
+
+      expect(json.id).to.equal(1);
+      expect(json.child[0].id).to.equal(2);
+      expect(json.child[0].child[0].id).to.equal(7);
+      expect(json.child[0].child[0].child[0].id).to.equal(8);
+      expect(json.child[1].id).to.equal(3);
+      expect(json.child[1].child[0].id).to.equal(4);
+    });
   });
 
 });

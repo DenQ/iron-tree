@@ -1,17 +1,7 @@
-let Node = require('./node');
+const Node = require('./node');
 const searchNode = require('../utils/search-node');
 const traversalTree = require('../utils/traversal-tree');
-
-function serializeTree(tree, node = null, target = []) {
-  node = node || tree.rootNode;
-  const index = target.push(
-    Object.assign({children: []}, node.content)
-  );
-  node.children.forEach((item) => {
-    serializeTree(tree, item, target[index-1].children);
-  });
-  return target;
-}
+const serializeTree = require('../utils/serialize-tree');
 
 module.exports = class Tree {
 
@@ -68,8 +58,8 @@ module.exports = class Tree {
     });
   }
 
-  toJson() {
-    const result = serializeTree(this, null);
+  toJson(options = { key_children: 'children' }) {
+    const result = serializeTree(this, null, [], options);
     if (result && result.length > 0) {
       return result[0];
     }
