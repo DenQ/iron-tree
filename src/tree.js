@@ -1,18 +1,6 @@
 let Node = require('./node');
 const searchNode = require('../utils/search-node');
-
-function traversalTree(tree, node = null, criteria, callback) {
-  const currentNode = node || tree.rootNode;
-  if (!node) {
-    callback(currentNode)
-  }
-  currentNode.traversal(criteria, callback);
-  const children = currentNode.children;
-
-  children.forEach((item) => {
-    traversalTree(tree, item, criteria, callback);
-  });
-}
+const traversalTree = require('../utils/traversal-tree');
 
 module.exports = class Tree {
 
@@ -67,6 +55,10 @@ module.exports = class Tree {
     this.traversal(null, (currentNode) => {
       currentNode.sort(compare);
     });
+  }
+
+  toJson() {
+
   }
 
 }

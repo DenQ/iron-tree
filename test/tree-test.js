@@ -199,6 +199,7 @@ describe('Tree', function() {
 
   });
 
+
   describe('Sort', function() {
 
     it('Order desc', function() {
@@ -217,6 +218,18 @@ describe('Tree', function() {
       expect(tree.rootNode.children[0].get('id')).to.equal(2);
       expect(tree.rootNode.children[1].get('id')).to.equal(3);
       // showTree(tree);
+    });
+
+  });
+
+
+  describe('toJson', function() {
+
+    it('Searialize tree to json', function() {
+      // tree = generateTreeDefault();
+      // const json = tree.toJson();
+      //
+      // console.log(json);
     });
 
   });
