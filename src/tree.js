@@ -46,4 +46,8 @@ module.exports = class Tree {
     return false;
   }
 
+  sort(compare) {
+
+  }
+
 }

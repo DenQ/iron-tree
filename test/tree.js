@@ -1,6 +1,7 @@
 const Node = require('../src/node');
 const Tree = require('../src/tree');
 const showTree = require('../utils/show-tree');
+const compareById = require('../utils/node-compare-by-id');
 const generateTreeDefault = require('../fakes/generate-tree-default');
 
 let chai = require('chai')
@@ -156,7 +157,7 @@ describe('Tree', function() {
       const destination = (currentNode) => currentNode.get('id') === 3;
       const result = tree.move(search, destination);
       const targetNode = tree.contains(search);
-      
+
       expect(result).to.equal(false);
       expect(targetNode).to.equal(undefined);
 
@@ -165,4 +166,26 @@ describe('Tree', function() {
   });
 
 
+//   describe('Sort', function() {
+//
+//     it('Order desc', function() {
+//       tree = generateTreeDefault();
+//       tree.sort(compareById(false));
+//
+//       showTree(tree);
+//     });
+//
+//   });
+//
 });
+
+// function traversal(tree, node = null, callback) {
+//   const currentNode = node || tree.rootNode;
+//   const children = currentNode.children;
+//   children.sort(compareById(false));
+//
+//   for(let i=0; i<children.length; i++) {
+//     const item = children[i];
+//     traversal(tree, item, callback);
+//   }
+// }

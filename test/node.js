@@ -141,4 +141,35 @@ describe('Node', function() {
 
   });
 
+
+  describe('Traversal', function() {
+
+    it('Change name for each child', function() {
+      node.add({ id: 2, name: 'Two node'});
+      node.add({ id: 3, name: 'Three node'});
+      node.add({ id: 15, name: 'Fifteen node'});
+      node.add({ id: 4, name: 'Four node'});
+      node.traversal(null, (currentNode) => {
+        const name = currentNode.get('name');
+        currentNode.set('name', `${name}!`);
+      });
+      expect(node.children[0].get('name')).to.equal('Two node!');
+      expect(node.children[1].get('name')).to.equal('Three node!');
+    });
+
+    it('Change name for item with id is 3', function() {
+      node.add({ id: 2, name: 'Two node'});
+      node.add({ id: 3, name: 'Three node'});
+      node.add({ id: 15, name: 'Fifteen node'});
+      node.add({ id: 4, name: 'Four node'});
+      node.traversal((currentNode) => currentNode.get('id') === 3, (currentNode) => {
+        const name = currentNode.get('name');
+        currentNode.set('name', `${name}!`);
+      });
+      expect(node.children[0].get('name')).to.equal('Two node');
+      expect(node.children[1].get('name')).to.equal('Three node!');
+    });
+
+  });
+
 });

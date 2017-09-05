@@ -37,4 +37,11 @@ module.exports = class Node {
     return this.children.sort(compare);
   }
 
+  traversal(criteria, callback) {
+    criteria = criteria || (() => true);
+    this.children
+      .filter(criteria)
+      .forEach(callback);
+  }
+
 }
