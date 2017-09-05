@@ -195,23 +195,32 @@ describe('Tree', function() {
           expect(some).to.equal(undefined);
         }
       });
-
-      // showTree(tree);
     });
 
   });
 
 
 
-//   describe('Sort', function() {
-//
-//     it('Order desc', function() {
-//       tree = generateTreeDefault();
-//       tree.sort(compareById(false));
-//
-//       showTree(tree);
-//     });
-//
-//   });
-//
+  describe('Sort', function() {
+
+    it('Order desc', function() {
+      tree = generateTreeDefault();
+      tree.sort(compareById(false));
+
+      expect(tree.rootNode.children[0].get('id')).to.equal(3);
+      expect(tree.rootNode.children[1].get('id')).to.equal(2);
+    });
+
+    it('Order asc', function() {
+      tree = generateTreeDefault();
+      tree.sort(compareById(false));
+      tree.sort(compareById(true));
+
+      expect(tree.rootNode.children[0].get('id')).to.equal(2);
+      expect(tree.rootNode.children[1].get('id')).to.equal(3);
+      // showTree(tree);
+    });
+
+  });
+
 });

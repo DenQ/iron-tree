@@ -3,6 +3,9 @@ const searchNode = require('../utils/search-node');
 
 function traversalTree(tree, node = null, criteria, callback) {
   const currentNode = node || tree.rootNode;
+  if (!node) {
+    callback(currentNode)
+  }
   currentNode.traversal(criteria, callback);
   const children = currentNode.children;
 
@@ -61,7 +64,9 @@ module.exports = class Tree {
   }
 
   sort(compare) {
-
+    this.traversal(null, (currentNode) => {
+      currentNode.sort(compare);
+    });
   }
 
 }
