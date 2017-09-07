@@ -277,19 +277,63 @@ describe('Tree', function() {
       expect(json.child[1].id).to.equal(3);
       expect(json.child[1].child[0].id).to.equal(4);
     });
+
+    describe('Options', function() {
+
+      it('Flag: empty_children', function() {
+        tree = generateTreeDefault();
+        const json = tree.toJson({
+          empty_children: false,
+        });
+
+        expect(json.children[0].children[0].children[0].id).to.equal(8);
+        expect(json.children[0].children[0].children[0].children).to.equal(undefined);
+      });
+
+    });
+
   });
 
 
   describe('Options', function() {
 
-    it('Existing child field in serialize tree when child is empty', function() {
-      tree = generateTreeDefault();
-      const json = tree.toJson({
-        empty_children: false,
+    it('Flags: key_id and key_parent', function() {
+      const object = { uid: 1, title: 'Root'};
+      const tree = new Tree(object);
+
+      const list = [
+        { uid: 2, _parent: 1 },
+        { uid: 3, _parent: 1 },
+        { uid: 4, _parent: 3 },
+        { uid: 5, _parent: 4 },
+        { uid: 6, _parent: 5 },
+        { uid: 7, _parent: 2 },
+        { uid: 8, _parent: 7 },
+      ]
+      .map((item) => {
+        item.title = `Node ${item.uid}`;
+        return item;
+      })
+      .forEach((item) => {
+        tree.add((parentNode) => {
+          return parentNode.get('uid') === item._parent;
+        }, item);
       });
 
-      expect(json.children[0].children[0].children[0].id).to.equal(8);
-      expect(json.children[0].children[0].children[0].children).to.equal(undefined);
+      // showTree(tree);
+      // console.log(tree.toJson({ key_children: 'child' }));
+
+      expect(tree instanceof Tree).to.equal(true);
+      expect(tree.rootNode instanceof Node).to.equal(true);
+
+      expect(tree.rootNode.get('uid')).to.equal(1);
+      expect(tree.rootNode.children[0].get('uid')).to.equal(2);
+      expect(tree.rootNode.children[1].get('uid')).to.equal(3);
+
+      expect(tree.rootNode.children[1].children[0].get('uid')).to.equal(4);
+      expect(tree.rootNode.children[1].children[0].children[0].get('uid')).to.equal(5);
+      expect(tree.rootNode.children[1].children[0].children[0].children[0].get('uid')).to.equal(6);
+
     });
 
   });
