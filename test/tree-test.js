@@ -338,4 +338,34 @@ describe('Tree', function() {
 
   });
 
+
+  describe('Hide load', function() {
+
+    it('2000 items', function() {
+      function getRandomInt(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      const list = (new Array(10000))
+        .fill()
+        .map((item, index) => {
+          return {
+            id: index + 1,
+            parent: getRandomInt(0, index)
+          }
+        });
+
+      tree = new Tree({ id: 0 });
+      list.forEach((item, index) => {
+        tree.add((parentNode) => {
+          return parentNode.get('id') === item.parent;
+        }, item);
+      });
+      const jTree = tree.toJson({
+        empty_children: false,
+      });
+
+    });
+
+  });
+
 });
