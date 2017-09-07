@@ -279,4 +279,19 @@ describe('Tree', function() {
     });
   });
 
+
+  describe('Options', function() {
+
+    it('Existing child field in serialize tree when child is empty', function() {
+      tree = generateTreeDefault();
+      const json = tree.toJson({
+        empty_children: false,
+      });
+
+      expect(json.children[0].children[0].children[0].id).to.equal(8);
+      expect(json.children[0].children[0].children[0].children).to.equal(undefined);
+    });
+
+  });
+
 });

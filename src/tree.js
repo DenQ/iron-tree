@@ -2,6 +2,7 @@ const Node = require('./node');
 const searchNode = require('../utils/search-node');
 const traversalTree = require('../utils/traversal-tree');
 const serializeTree = require('../utils/serialize-tree');
+const removeEmptyChildren = require('../utils/remove-empty-children');
 
 module.exports = class Tree {
 
@@ -58,11 +59,20 @@ module.exports = class Tree {
     });
   }
 
-  toJson(options = { key_children: 'children' }) {
+  toJson(options = {}) {
+    const optionsDefault = {
+      key_children: 'children',
+      empty_children: true,
+    };
+    options = Object.assign(optionsDefault, options);
     const result = serializeTree(this, null, [], options);
+
+    if (!options.empty_children) {
+      removeEmptyChildren(result, null, options);
+    }
+
     if (result && result.length > 0) {
       return result[0];
     }
   }
-
 }
