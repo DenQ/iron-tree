@@ -167,6 +167,19 @@ describe('Tree', function() {
 
   describe('Traversal', function() {
 
+    it('Add new field for item.id === 7', function() {
+      tree = generateTreeDefault();
+      const criteria = (currentNode) => currentNode.get('id') === 7;
+      tree.traversal(criteria, (currentNode) => {
+        currentNode.set('some', true);
+      });
+      // showTree(tree);
+      tree.traversal(null, (currentNode) => {
+        const some = currentNode.get('some');
+        expect(some).to.equal((currentNode.get('id') === 7) ? true : undefined );
+      });
+    });
+
     it('Add new property for each node', function() {
       tree = generateTreeDefault();
       tree.traversal(null, (currentNode) => {
@@ -206,6 +219,7 @@ describe('Tree', function() {
       tree = generateTreeDefault();
       tree.sort(compareById(false));
 
+      // showTree(tree);
       expect(tree.rootNode.children[0].get('id')).to.equal(3);
       expect(tree.rootNode.children[1].get('id')).to.equal(2);
     });
@@ -215,10 +229,9 @@ describe('Tree', function() {
       tree.sort(compareById(false));
       tree.sort(compareById(true));
 
+      // showTree(tree);
       expect(tree.rootNode.children[0].get('id')).to.equal(2);
       expect(tree.rootNode.children[1].get('id')).to.equal(3);
-
-      // showTree(tree);
     });
 
   });
