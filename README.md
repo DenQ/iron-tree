@@ -1,6 +1,9 @@
 # iron-tree
 This package builds a tree and gives a lot of useful methods for managing a tree and its nodes
 
+# Install
+`npm install @denq/iron-tree --save`
+
 ****
 # Tree
 This is the class of tree management
@@ -230,3 +233,6 @@ This is the node management class
   ```
 
 ****
+
+## TDD
+`npm test`

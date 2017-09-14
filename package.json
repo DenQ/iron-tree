@@ -1,7 +1,7 @@
 {
   "name": "@denq/iron-tree",
-  "version": "1.1.0",
-  "description": "",
+  "version": "1.2.0",
+  "description": "Build tree and many method for manipulation",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -10,6 +10,17 @@
     "type": "git",
     "url": "git+https://github.com/DenQ/iron-tree.git"
   },
+  "keywords": [
+    "tree",
+    "node",
+    "criteria",
+    "iron-tree",
+    "sort tree",
+    "remove nodes",
+    "contains",
+    "move nodes",
+    "toJson"
+  ],
   "author": "DenQ",
   "license": "MIT",
   "bugs": {
