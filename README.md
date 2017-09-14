@@ -4,6 +4,52 @@ This package builds a tree and gives a lot of useful methods for managing a tree
 # Install
 `npm install @denq/iron-tree --save`
 
+# Base usage
+
+```
+// create tree
+const object = { id: 1, title: 'Root' };
+const tree = new Tree(object);
+
+// add nodes
+const regularObject = { id:2, title: 'Node 2'}
+tree.add((parentNode) => {
+  return parentNode.get('id') === 1;
+}, regularObject);
+
+// contains node
+const targetNode = tree.contains((currentNode) => {
+  return currentNode.get('id') === 2;
+});  
+
+// remove node
+const result = tree.remove((currentNode) => {
+  return currentNode.get('id') === 2;
+});
+
+// traversal
+const criteria = (currentNode) => currentNode.get('id') === 1;
+tree.traversal(criteria, (currentNode) => {
+  currentNode.set('some', true);
+});
+```
+```
+function compareById(vector) {
+  return (a, b) => {
+    const aid = Number(a.get('id'));
+    const bid = Number(b.get('id'));
+    if (aid > bid) {
+      return vector ? 1 : -1;
+    } else if (aid < bid) {
+      return vector ? -1 : 1;
+    } else {
+      return 0
+    }
+  };
+}
+tree.sort(compareById(false));  // desc
+```
+The following are the other methods available.
 ****
 # Tree
 This is the class of tree management
