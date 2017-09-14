@@ -6,7 +6,7 @@ This package builds a tree and gives a lot of useful methods for managing a tree
 
 # Base usage
 
-```
+```js
 // create tree
 const object = { id: 1, title: 'Root' };
 const tree = new Tree(object);
@@ -33,7 +33,7 @@ tree.traversal(criteria, (currentNode) => {
   currentNode.set('some', true);
 });
 ```
-```
+```js
 function compareById(vector) {
   return (a, b) => {
     const aid = Number(a.get('id'));
@@ -64,7 +64,7 @@ This is the class of tree management
     * object - json `object`. Optional
   * return `IronTree`
   * example
-  ```
+  ```js
     const object = { id: 1, title: 'Root' };
     const tree = new Tree(object);
   ```
@@ -74,12 +74,12 @@ This is the class of tree management
     * object - content for the node
   * return `IronTree`
   * examples
-  ```
+  ```js
   const object = { id: 1, title: 'Root' };
   const tree = new Tree();
   const resultTree = tree.add('root', object);
   ```
-  ```
+  ```js
   const regularObject = { id:2, title: 'Node 2'}
   const resultTree = tree.add((parentNode) => {
       return parentNode.get('id') === 1;
@@ -90,7 +90,7 @@ This is the class of tree management
     * criteria(Node) - return `boolean`
   * return `boolean`
   * examples
-  ```
+  ```js
   const result = tree.remove((currentNode) => {
       return currentNode.get('id') === 7;
   });
@@ -100,7 +100,7 @@ This is the class of tree management
     * criteria(Node) - return `boolean`
   * return `Node`
   * examples
-  ```
+  ```js
   const targetNode = tree.contains((currentNode) => {
       return currentNode.get('id') === 7;
   });
@@ -111,7 +111,7 @@ This is the class of tree management
     * compare(a:Node, b:Node) - comparison function
   * return `null`
   * examples
-  ```
+  ```js
   function compareById(vector) {
       return (a, b) => {
           const aid = Number(a.get('id'));
@@ -133,7 +133,7 @@ This is the class of tree management
     * destination(Node) - callback
   * return `boolean`
   * examples
-  ```
+  ```js
   const search = (currentNode) => currentNode.get('id') === 7;
   const destination = (currentNode) => currentNode.get('id') === 3;
   const result = tree.move(search, destination);
@@ -144,13 +144,13 @@ This is the class of tree management
     * callback(Node)
   * return `null`
   * examples
-  ```
+  ```js
   const criteria = (currentNode) => currentNode.get('id') === 7;
   tree.traversal(criteria, (currentNode) => {
       currentNode.set('some', true);
   });
   ```
-  ```
+  ```js
   tree.traversal(null, (currentNode) => {
       if (currentNode.get('id')%2 === 0) {
         currentNode.set('some', true);
@@ -164,7 +164,7 @@ This is the class of tree management
       * key_children - Type `string`. Field name for children. Default `children`
   * return `object`
   * examples
-  ```    
+  ```js
   const json = tree.toJson();
   ```
 ****
@@ -185,12 +185,12 @@ This is the node management class
   * params
     * json - simple `json` object
   * examples
-  ```
-    const rootContent = {
-      id: 1,
-      name: 'Root',
-    }
-    let node = new Node(rootContent);
+  ```js
+  const rootContent = {
+    id: 1,
+    name: 'Root',
+  }
+  let node = new Node(rootContent);
   ```
 
 * **.add(child)** Adding a child to the node
@@ -198,7 +198,7 @@ This is the node management class
   * params
     * child - type `object`/json
   * examples
-  ```
+  ```js
   const rootContent = {
     id: 1,
     name: 'Root',
@@ -211,7 +211,7 @@ This is the node management class
   * params
     * criteria - criteria function for removing nodes
   * examples
-  ```
+  ```js
   const removedNodes = node.remove((itemNode) => {
       return itemNode.get('id') === 3;
   })
@@ -222,7 +222,7 @@ This is the node management class
   * params
     * path - key name for object in node. For example `id` or `fullname`, etc...
   * examples
-  ```
+  ```js
     node.get('id'); // 1
     node.get('name') // "Some name"
   ```
@@ -232,7 +232,7 @@ This is the node management class
     * path - `String` field name
     * value - `mixed`
   * examples
-  ```
+  ```js
   node.set('id', 100)); // returned `true`. Node.content.id = 100
   node.get('id'); // 100
   ```
@@ -241,7 +241,7 @@ This is the node management class
   * params
     * compare - custom function for sorting
   * examples
-  ```
+  ```js
   function compareById(vector) {
       return (a, b) => {
         const aid = Number(a.get('id'));
@@ -263,14 +263,14 @@ This is the node management class
     * criteria - `function` criteria each nodes
     * callback - `function` fire when criteria is true for node
   * examples
-  ```
+  ```js
   // for all nodes
   node.traversal(null, (currentNode) => {
     const name = currentNode.get('name');
     currentNode.set('name', `${name}!`);  // Last symbol "!"
   });
   ```
-  ```
+  ```js
   // only for node.id == 3
   node.traversal((currentNode) => currentNode.get('id') === 3, (currentNode) => {
     const name = currentNode.get('name');
