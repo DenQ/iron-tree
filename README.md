@@ -125,18 +125,108 @@ This is the node management class
 
 ### Properties
 * **content** Content of the node
-  * type ```object```
+  * type `object`
 * **children** Children of the node
-  * type ```array```
+  * type `array`
 * **length** Number children of the node
-  * type ```number```
+  * type `number`
 
 ### Methods
+* **constructor(json)**
+  * params
+    * json - simple `json` object
+  * examples
+  ```
+    const rootContent = {
+      id: 1,
+      name: 'Root',
+    }
+    let node = new Node(rootContent);
+  ```
+
 * **.add(child)** Adding a child to the node
+  * return `Node` - created node
+  * params
+    * child - type `object`/json
+  * examples
+  ```
+  const rootContent = {
+    id: 1,
+    name: 'Root',
+  }
+  let node = new Node(rootContent);
+  const childNode = node.add({ id: 2, name: 'Two node'});
+  ```
 * **.remove(criteria)** Removing a child node according to the criterion
+  * return - removed `Node`
+  * params
+    * criteria - criteria function for removing nodes
+  * examples
+  ```
+  const removedNodes = node.remove((itemNode) => {
+      return itemNode.get('id') === 3;
+  })
+  ```
+
 * **.get(path)** Access to node content by field name
+  * return `mixed`
+  * params
+    * path - key name for object in node. For example `id` or `fullname`, etc...
+  * examples
+  ```
+    node.get('id'); // 1
+    node.get('name') // "Some name"
+  ```
 * **.set(path, value)** Setting a value or creating a new field in the contents of a node
+  * return `boolean`
+  * params
+    * path - `String` field name
+    * value - `mixed`
+  * examples
+  ```
+  node.set('id', 100)); // returned `true`. Node.content.id = 100
+  node.get('id'); // 100
+  ```
 * **.sort(compare)** Sorting child nodes
+  * return `null`
+  * params
+    * compare - custom function for sorting
+  * examples
+  ```
+  function compareById(vector) {
+      return (a, b) => {
+        const aid = Number(a.get('id'));
+        const bid = Number(b.get('id'));
+        if (aid > bid) {
+          return vector ? 1 : -1;
+        } else if (aid < bid) {
+          return vector ? -1 : 1;
+        } else {
+          return 0
+        }
+      };
+  }
+  node.sort(compareById(false));
+  ```
 * **.traversal(criteria, callback)** Bypassing child nodes according to the criterion and applying function to them
+  * return `null`
+  * params
+    * criteria - `function` criteria each nodes
+    * callback - `function` fire when criteria is true for node
+  * examples
+  ```
+  // for all nodes
+  node.traversal(null, (currentNode) => {
+    const name = currentNode.get('name');
+    currentNode.set('name', `${name}!`);  // Last symbol "!"
+  });
+  ```
+  ```
+  // only for node.id == 3
+  node.traversal((currentNode) => currentNode.get('id') === 3, (currentNode) => {
+    const name = currentNode.get('name');
+    currentNode.set('name', `${name}!`);  // Last symbol "!"
+  });
+  ```
 
 ****
