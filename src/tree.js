@@ -18,6 +18,10 @@ module.exports = class Tree {
     return this.rootNode.get(path);
   }
 
+  set(path, value) {
+    this.rootNode.set(path, value);
+  }
+
   add(callback, object) {
     const type = typeof callback;
     if (type === 'string' && callback === 'root') {

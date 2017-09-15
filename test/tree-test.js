@@ -352,7 +352,6 @@ describe('Tree', function() {
   });
 
 
-
   describe('Get', function() {
 
     it('Regular', function() {
@@ -364,6 +363,24 @@ describe('Tree', function() {
     });
 
   });
+
+
+  describe('Set', function() {
+
+    it('Regular set', function() {
+      expect(tree.get('id')).to.equal(1);
+      tree.set('id', 101);
+      expect(tree.get('id')).to.equal(101);
+    });
+
+    it('Add new property', function() {
+      expect(tree.get('some')).to.equal(undefined);
+      tree.set('some', true);
+      expect(tree.get('some')).to.equal(true);
+    });
+
+  });
+
 
   describe('Hide load', function() {
 
