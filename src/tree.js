@@ -18,6 +18,7 @@ module.exports = class Tree {
     return this.rootNode.get(path);
   }
 
+  // only for rootNode
   set(path, value) {
     this.rootNode.set(path, value);
   }
