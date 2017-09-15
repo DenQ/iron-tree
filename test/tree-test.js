@@ -352,20 +352,50 @@ describe('Tree', function() {
   });
 
 
+  describe('Get', function() {
+
+    it('Regular', function() {
+      expect(tree.get('id')).to.equal(1);
+    });
+
+    it('If not exists property', function() {
+      expect(tree.get('uid')).to.equal(undefined);
+    });
+
+  });
+
+
+  describe('Set', function() {
+
+    it('Regular set', function() {
+      expect(tree.get('id')).to.equal(1);
+      tree.set('id', 101);
+      expect(tree.get('id')).to.equal(101);
+    });
+
+    it('Add new property', function() {
+      expect(tree.get('some')).to.equal(undefined);
+      tree.set('some', true);
+      expect(tree.get('some')).to.equal(true);
+    });
+
+  });
+
+
   describe('Hide load', function() {
 
     it('2000 items', function() {
       function getRandomInt(min, max) {
-          return Math.floor(Math.random() * (max - min + 1)) + min;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
       }
       const list = (new Array(10000))
-        .fill()
-        .map((item, index) => {
-          return {
-            id: index + 1,
-            parent: getRandomInt(0, index)
-          }
-        });
+      .fill()
+      .map((item, index) => {
+        return {
+          id: index + 1,
+          parent: getRandomInt(0, index)
+        }
+      });
 
       tree = new Tree({ id: 0 });
       list.forEach((item, index) => {
