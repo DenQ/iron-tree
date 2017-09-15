@@ -13,6 +13,11 @@ module.exports = class Tree {
     }
   }
 
+  // only for rootNode
+  get(path) {
+    return this.rootNode.get(path);
+  }
+
   add(callback, object) {
     const type = typeof callback;
     if (type === 'string' && callback === 'root') {
