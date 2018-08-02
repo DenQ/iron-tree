@@ -1,4 +1,4 @@
-const Tree = require('../src/tree');
+const Tree = require('../dist/index');
 
 module.exports = function() {
   const object = {id: 1, title: 'Root'};

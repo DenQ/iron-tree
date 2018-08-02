@@ -1,5 +1,5 @@
-const Node = require('../src/node');
-const Tree = require('../src/tree');
+const Tree = require('../dist/index');
+const Node = Tree.Node;
 const showTree = require('../utils/show-tree');
 const compareById = require('../utils/node-compare-by-id');
 const generateTreeDefault = require('../fakes/generate-tree-default');

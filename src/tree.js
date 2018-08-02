@@ -4,25 +4,25 @@ const traversalTree = require('../utils/traversal-tree');
 const serializeTree = require('../utils/serialize-tree');
 const removeEmptyChildren = require('../utils/remove-empty-children');
 
-module.exports = class Tree {
-
+class Tree {
+  
   constructor(object = undefined) {
     this.rootNode = null;
     if (object) {
       this.rootNode = new Node(object);
     }
   }
-
+  
   // only for rootNode
   get(path) {
     return this.rootNode.get(path);
   }
-
+  
   // only for rootNode
   set(path, value) {
     this.rootNode.set(path, value);
   }
-
+  
   add(callback, object) {
     const type = typeof callback;
     if (type === 'string' && callback === 'root') {
@@ -37,11 +37,11 @@ module.exports = class Tree {
       }
     }
   }
-
+  
   contains(criteria) {
     return searchNode(this, null, criteria);
   }
-
+  
   remove(criteria) {
     const targetNode = this.contains(criteria);
     if (targetNode) {
@@ -49,7 +49,7 @@ module.exports = class Tree {
     }
     return false;
   }
-
+  
   move(search, destination) {
     const targetNode = this.contains(search);
     if (targetNode && this.remove(search)) {
@@ -58,17 +58,17 @@ module.exports = class Tree {
     }
     return false;
   }
-
+  
   traversal(criteria, callback) {
     traversalTree(this, null, criteria, callback);
   }
-
+  
   sort(compare) {
     this.traversal(null, (currentNode) => {
       currentNode.sort(compare);
     });
   }
-
+  
   toJson(options = {}) {
     const optionsDefault = {
       key_children: 'children',
@@ -76,13 +76,17 @@ module.exports = class Tree {
     };
     options = Object.assign(optionsDefault, options);
     const result = serializeTree(this, null, [], options);
-
+    
     if (!options.empty_children) {
       removeEmptyChildren(result, null, options);
     }
-
+    
     if (result && result.length > 0) {
       return result[0];
     }
   }
 }
+
+Tree.Node = Node;
+
+module.exports = Tree; 

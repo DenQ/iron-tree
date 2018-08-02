@@ -1,4 +1,4 @@
-const Node = require('../src/node');
+const Node = require('../dist/index').Node;
 const compareById = require('../utils/node-compare-by-id');
 const chai = require('chai')
   , assert = chai.assert
