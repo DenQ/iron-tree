@@ -236,18 +236,42 @@ describe('Tree', function() {
 
   });
 
-  describe.only('getPath', () => {
+  describe('getPath', () => {
 
-    it('w', () => {
+    it('Get path 1 - 6', () => {
       tree = generateTreeDefault();
       const criteria = (currentNode) => currentNode.get('id') === 6;
       const targetNode = tree.contains(criteria);
-      // console.log(111, targetNode.parent);
+      const path = targetNode.getPath();
+      const pathString = path
+        .map((item) => item.get('id'))
+        .join(',');
       
-      expect(targetNode.get('id')).to.equal(6);
-      expect(targetNode.get('parent')).to.equal(5);
-      // expect(targetNode.parent).to.equal(5);
-      expect(targetNode.getPath()).to.equal('1,3,4,5,6');
+      expect(pathString).to.equal('1,3,4,5,6');
+    });
+
+    it('Get path 1 - 8', () => {
+      tree = generateTreeDefault();
+      const criteria = (currentNode) => currentNode.get('id') === 8;
+      const targetNode = tree.contains(criteria);
+      const path = targetNode.getPath();
+      const pathString = path
+        .map((item) => item.get('id'))
+        .join(',');
+      
+      expect(pathString).to.equal('1,2,7,8');
+    });
+
+    it('Get path 1 - 2', () => {
+      tree = generateTreeDefault();
+      const criteria = (currentNode) => currentNode.get('id') === 2;
+      const targetNode = tree.contains(criteria);
+      const path = targetNode.getPath();
+      const pathString = path
+        .map((item) => item.get('id'))
+        .join(',');
+      
+      expect(pathString).to.equal('1,2');
     });
 
   });

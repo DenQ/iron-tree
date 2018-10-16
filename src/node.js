@@ -45,14 +45,13 @@ module.exports = class Node {
   }
 
   getPath() {
-    const parentList = [this.get('id')];
+    const parentList = [];
     let currentNode = this;
-    while(currentNode.get('parent')) {
-      const parent = currentNode.get('parent');
-      parentList.push(parent);
+    while(currentNode) {
+      parentList.push(currentNode);
       currentNode = currentNode.parent;
     }
-    return parentList.reverse().join(',');
+    return parentList.reverse();
   }
 
 }
