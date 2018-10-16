@@ -236,6 +236,22 @@ describe('Tree', function() {
 
   });
 
+  describe.only('getPath', () => {
+
+    it('w', () => {
+      tree = generateTreeDefault();
+      const criteria = (currentNode) => currentNode.get('id') === 6;
+      const targetNode = tree.contains(criteria);
+      // console.log(111, targetNode.parent);
+      
+      expect(targetNode.get('id')).to.equal(6);
+      expect(targetNode.get('parent')).to.equal(5);
+      // expect(targetNode.parent).to.equal(5);
+      expect(targetNode.getPath()).to.equal('1,3,4,5,6');
+    });
+
+  });
+
 
   describe('toJson', function() {
 
