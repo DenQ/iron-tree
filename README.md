@@ -32,6 +32,14 @@ const criteria = (currentNode) => currentNode.get('id') === 1;
 tree.traversal(criteria, (currentNode) => {
   currentNode.set('some', true);
 });
+
+// getPath
+const criteria = (currentNode) => currentNode.get('id') === 6;
+const targetNode = tree.contains(criteria);
+const path = targetNode.getPath();
+const pathString = path
+  .map((item) => item.get('id'))
+  .join(',');
 ```
 ```js
 function compareById(vector) {
@@ -52,7 +60,7 @@ tree.sort(compareById(false));  // desc
 The following are the other methods available.
 ****
 # Tree
-This is the class of tree management
+This is the class of tree management.
 
 ### Properties
 * **rootNode** Root tree node
@@ -68,7 +76,7 @@ This is the class of tree management
     const object = { id: 1, title: 'Root' };
     const tree = new Tree(object);
   ```
-* **.add(criteria, object)** Adds a node to the tree if the criterion is true
+* **.add(criteria, object)** Adds a node to the tree if the criterion is true.
   * params
     * criteria(Node) - `function` or `string`. If `string` then criteria is **"root"**
     * object - content for the node
@@ -85,7 +93,7 @@ This is the class of tree management
       return parentNode.get('id') === 1;
   }, regularObject);
   ```
-* **.remove(criteria)** Removes a node from a tree if the criterion is true
+* **.remove(criteria)** Removes a node from a tree if the criterion is true.
   * params
     * criteria(Node) - return `boolean`
   * return `boolean`
@@ -95,7 +103,7 @@ This is the class of tree management
       return currentNode.get('id') === 7;
   });
   ```
-* **.contains(criteria)** Searches for a node in a tree according to the criterion
+* **.contains(criteria)** Searches for a node in a tree according to the criterion.
   * params
     * criteria(Node) - return `boolean`
   * return `Node`
@@ -106,7 +114,7 @@ This is the class of tree management
   });
   ```
 
-* **.sort(compare)** Sorts a tree
+* **.sort(compare)** Sorts a tree.
   * params
     * compare(a:Node, b:Node) - comparison function
   * return `null`
@@ -127,7 +135,7 @@ This is the class of tree management
   }
   tree.sort(compareById(false));  //Desc
   ```
-* **.move(criteria, destination)** Moves the desired branch or node to the node or branch of the destination, according to the criteria
+* **.move(criteria, destination)** Moves the desired branch or node to the node or branch of the destination, according to the criteria.
   * params
     * criteria(Node) - callback
     * destination(Node) - callback
@@ -138,7 +146,7 @@ This is the class of tree management
   const destination = (currentNode) => currentNode.get('id') === 3;
   const result = tree.move(search, destination);
   ```
-* **.traversal(criteria, callback)** Bypasses the tree and, according to the criterion, calls a function for each node
+* **.traversal(criteria, callback)** Bypasses the tree and, according to the criterion, calls a function for each node.
   * params
     * criteria(Node) - return `boolean`
     * callback(Node)
@@ -157,7 +165,7 @@ This is the class of tree management
       }
   });
   ```
-* **.toJson(options)** Represents a tree in the form of a json format
+* **.toJson(options)** Represents a tree in the form of a json format.
   * params
     * options - `object`. Optional
       * empty_children - Type `boolean`. Allow empty children. Default `true`
@@ -170,7 +178,7 @@ This is the class of tree management
 ****
 
 # Node
-This is the node management class
+This is the node management class.
 
 ### Properties
 * **content** Content of the node
@@ -193,7 +201,7 @@ This is the node management class
   let node = new Node(rootContent);
   ```
 
-* **.add(child)** Adding a child to the node
+* **.add(child)** Adding a child to the node.
   * return `Node` - created node
   * params
     * child - type `object`/json
@@ -206,7 +214,7 @@ This is the node management class
   let node = new Node(rootContent);
   const childNode = node.add({ id: 2, name: 'Two node'});
   ```
-* **.remove(criteria)** Removing a child node according to the criterion
+* **.remove(criteria)** Removing a child node according to the criterion.
   * return - removed `Node`
   * params
     * criteria - criteria function for removing nodes
@@ -217,7 +225,7 @@ This is the node management class
   })
   ```
 
-* **.get(path)** Access to node content by field name
+* **.get(path)** Access to node content by field name.
   * return `mixed`
   * params
     * path - key name for object in node. For example `id` or `fullname`, etc...
@@ -226,7 +234,7 @@ This is the node management class
     node.get('id'); // 1
     node.get('name') // "Some name"
   ```
-* **.set(path, value)** Setting a value or creating a new field in the contents of a node
+* **.set(path, value)** Setting a value or creating a new field in the contents of a node.
   * return `boolean`
   * params
     * path - `String` field name
@@ -257,7 +265,7 @@ This is the node management class
   }
   node.sort(compareById(false));
   ```
-* **.traversal(criteria, callback)** Bypassing child nodes according to the criterion and applying function to them
+* **.traversal(criteria, callback)** Bypassing child nodes according to the criterion and applying function to them.
   * return `null`
   * params
     * criteria - `function` criteria each nodes
@@ -276,6 +284,16 @@ This is the node management class
     const name = currentNode.get('name');
     currentNode.set('name', `${name}!`);  // Last symbol "!"
   });
+  ```
+
+* **.getPath()** This method return array Nodes from `root node` to `current node`. It maybe helpful for breadcrumbs.
+  * return `Array`
+  * exampels
+  ```js
+  const path = targetNode.getPath();
+  const pathString = path
+    .map((item) => item.get('id'))
+    .join(','); // 1,3,4,5,6
   ```
 
 ****
