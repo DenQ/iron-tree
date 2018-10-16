@@ -236,6 +236,46 @@ describe('Tree', function() {
 
   });
 
+  describe('getPath', () => {
+
+    it('Get path 1 - 6', () => {
+      tree = generateTreeDefault();
+      const criteria = (currentNode) => currentNode.get('id') === 6;
+      const targetNode = tree.contains(criteria);
+      const path = targetNode.getPath();
+      const pathString = path
+        .map((item) => item.get('id'))
+        .join(',');
+      
+      expect(pathString).to.equal('1,3,4,5,6');
+    });
+
+    it('Get path 1 - 8', () => {
+      tree = generateTreeDefault();
+      const criteria = (currentNode) => currentNode.get('id') === 8;
+      const targetNode = tree.contains(criteria);
+      const path = targetNode.getPath();
+      const pathString = path
+        .map((item) => item.get('id'))
+        .join(',');
+      
+      expect(pathString).to.equal('1,2,7,8');
+    });
+
+    it('Get path 1 - 2', () => {
+      tree = generateTreeDefault();
+      const criteria = (currentNode) => currentNode.get('id') === 2;
+      const targetNode = tree.contains(criteria);
+      const path = targetNode.getPath();
+      const pathString = path
+        .map((item) => item.get('id'))
+        .join(',');
+      
+      expect(pathString).to.equal('1,2');
+    });
+
+  });
+
 
   describe('toJson', function() {
 
