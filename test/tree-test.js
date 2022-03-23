@@ -1,13 +1,11 @@
-const Tree = require('../dist/index');
-const Node = Tree.Node;
-const showTree = require('../utils/show-tree');
+const { expect } = require('chai');
+
 const compareById = require('../utils/node-compare-by-id');
 const generateTreeDefault = require('../fakes/generate-tree-default');
+const Tree = require('../dist/index');
 
-const chai = require('chai')
-  , assert = chai.assert
-  , expect = chai.expect
-  , should = chai.should();
+const { Node }  = Tree;
+
 
 let object = { id: 1, title: 'Root' };
 let tree = new Tree(object);
