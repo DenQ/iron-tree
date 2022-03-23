@@ -1,9 +1,8 @@
+const { assert, expect } = require('chai');
+
 const Node = require('../dist/index').Node;
 const compareById = require('../utils/node-compare-by-id');
-const chai = require('chai')
-  , assert = chai.assert
-  , expect = chai.expect
-  , should = chai.should();
+
 
 
 const rootContent = {
