@@ -4,7 +4,7 @@
   "description": "Build tree and many method for manipulation",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
